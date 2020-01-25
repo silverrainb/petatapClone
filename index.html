@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Petatap Clone</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="paperjs-v0.12.4/dist/paper-full.js"></script>
+    <script type="text/paperscript" canvas="canvas">
+        // assign circles array
+        var circles = []
+
+        //When key is pressed, run the func
+        function onKeyDown(event) {
+            // create random point
+            var maxPoint = new Point(view.size.width, view.size.height)
+            var randomPoint = Point.random()
+            var point = maxPoint * randomPoint
+            // create new circle
+            var newCircle = new Path.Circle(point, 500)
+            // fill color in the new circle
+            newCircle.fillColor = "yellow"
+            //push the new circle in the circles array
+            circles.push(newCircle)
+        }
+
+        // animation frame
+        function onFrame(event){
+            for(var i=0; i<circles.length; i++){
+                // add hue to change color
+                circles[i].fillColor.hue += 1
+                // shrink circles
+                circles[i].scale(.9)
+            }
+        }
+    </script>
 </head>
 <body>
-$END$
+<canvas id="canvas" resize></canvas>
 </body>
 </html>
